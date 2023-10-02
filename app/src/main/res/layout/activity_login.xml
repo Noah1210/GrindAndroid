@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.LoginActivity">
+    <include
+        layout="@layout/custom_action_bar"/>
+
+    <EditText
+        android:id="@+id/txLogin"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/custom_input"
+        android:drawableLeft="@drawable/custom_person"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/light_gray"
+        android:textFontWeight="500"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.29000002" />
+
+    <EditText
+        android:id="@+id/txPassword"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/custom_input"
+        android:drawableLeft="@drawable/custom_password"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:textFontWeight="500"
+        android:textSize="18dp"
+        android:hint="Password"
+        android:inputType="textPersonName"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:password="true"
+        android:textColor="@color/white"
+        android:textColorHint="@color/light_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txLogin" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btSignIn"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/custom_button_main"
+        android:text="Sign in"
+        android:enabled="false"
+        android:textFontWeight="500"
+        android:textSize="16dp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txPassword" />
+
+    <ProgressBar
+        android:id="@+id/progBarLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/btSignIn"
+        app:layout_constraintStart_toStartOf="@+id/btSignIn"
+        app:layout_constraintTop_toBottomOf="@+id/btSignIn" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btLoginSignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/custom_button_secondary"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="New to Grind? Sign up now."
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textFontWeight="500"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progBarLogin" />
+
+    <TextView
+        android:id="@+id/tvLoginCredidentials"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="Enter your credentials to sign in to your account."
+        android:textColor="@color/white"
+        android:textFontWeight="500"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/txLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txLoginDiscover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="Glad to have you back!"
+        android:textColor="@color/white"
+        android:textFontWeight="600"
+        android:textSize="28dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvLoginCredidentials"
+        app:layout_constraintEnd_toEndOf="@+id/tvLoginCredidentials"
+        app:layout_constraintStart_toStartOf="@+id/tvLoginCredidentials" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
