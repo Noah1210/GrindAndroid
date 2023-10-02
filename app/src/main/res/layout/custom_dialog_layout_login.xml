@@ -7,25 +7,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/black"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="@android:color/black">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/dialog_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:paddingBottom="5dp"
             android:text="Invalid credidentials"
-            android:textSize="20dp"
-            android:paddingBottom="5dp"/>
+            android:textColor="@color/white"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/dialog_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/light_gray"
-            android:text="Sorry, we were not able to find this account. Please try again or create a new account." />
+            android:text="Sorry, we were not able to find this account. Please try again or create a new account."
+            android:textColor="@color/light_gray" />
 
         <Button
             android:id="@+id/positive_button"
