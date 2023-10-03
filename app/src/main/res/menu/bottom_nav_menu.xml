@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/home"
-        android:title="Home"
+    <item
+        android:id="@+id/home"
         android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home"
 
         />
-    <item android:id="@+id/info"
-        android:title="Info"
-        android:icon="@drawable/ic_baseline_book_24"/>
-    <item android:id="@+id/settings"
-        android:title="Settings"
-        android:icon="@drawable/ic_baseline_settings_24"/>
+    <item
+        android:id="@+id/movie"
+        android:icon="@drawable/ic_baseline_movie_24"
+        android:title="Movies" />
+    <item
+        android:id="@+id/show"
+        android:icon="@drawable/ic_baseline_tv_24"
+        android:title="Shows" />
+    <item
+        android:id="@+id/account"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Account" />
+
 
 
 </menu>

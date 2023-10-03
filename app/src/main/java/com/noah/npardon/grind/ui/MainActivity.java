@@ -16,8 +16,9 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
 
     HomeFragment homeFragment = new HomeFragment();
-    SettingsFragment settingsFragment = new SettingsFragment();
-    InfoFragment infoFragment = new InfoFragment();
+    AccountFragment accountFragment = new AccountFragment();
+    MovieFragment movieFragment = new MovieFragment();
+    ShowFragment showFragment = new ShowFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,13 +34,17 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("fragment", "HOME: ");
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
                         return true;
-                    case R.id.settings:
-                        Log.d("fragment", "SETTINGS: ");
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container,settingsFragment).commit();
+                    case R.id.account:
+                        Log.d("fragment", "ACCOUNT: ");
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, accountFragment).commit();
                         return true;
-                    case R.id.info:
-                        Log.d("fragment", "INFO: ");
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container,infoFragment).commit();
+                    case R.id.movie:
+                        Log.d("fragment", "MOVIE: ");
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, movieFragment).commit();
+                        return true;
+                    case R.id.show:
+                        Log.d("fragment", "SHOW: ");
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, showFragment).commit();
                         return true;
                 }
                 return false;
