@@ -89,10 +89,10 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
                         android:backgroundTint="@color/white"
-                        android:paddingLeft="30dp"
-                        android:drawablePadding="5dp"
                         android:drawableLeft="@drawable/ic_baseline_info_24"
+                        android:drawablePadding="5dp"
                         android:gravity="center_vertical"
+                        android:paddingLeft="30dp"
                         android:text="Details"
                         android:textAllCaps="false"
                         android:textSize="15dp"
@@ -105,13 +105,13 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
                         android:backgroundTint="@color/dark_gray"
-                        android:paddingLeft="30dp"
-                        android:drawablePadding="5dp"
                         android:drawableLeft="@drawable/ic_baseline_add_24"
+                        android:drawablePadding="5dp"
                         android:gravity="center_vertical"
+                        android:paddingLeft="30dp"
                         android:text="My list"
-                        android:textColor="@color/white"
                         android:textAllCaps="false"
+                        android:textColor="@color/white"
                         android:textSize="15dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -125,14 +125,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="0dp">
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginStart="8dp"
+                    android:layout_weight="1"
                     android:text="Trending"
                     android:textColor="@color/white"
                     android:textSize="22sp" />
@@ -141,19 +141,18 @@
                     android:id="@+id/buttonShowTrending"
                     android:layout_width="55dp"
                     android:layout_height="30dp"
-                    android:layout_marginRight="5dp"
-                    android:backgroundTint="@color/white"
-                    android:background="@drawable/button_corners"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/button_corners"
+                    android:backgroundTint="@color/white"
                     android:text="All"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
-                    android:textSize="14dp"
                     android:textFontWeight="500"
+                    android:textSize="14dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
             </LinearLayout>
-
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -166,324 +165,82 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="0dp">
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginStart="8dp"
+                    android:layout_weight="1"
                     android:text="Most voted"
                     android:textColor="@color/white"
                     android:textSize="22sp" />
 
                 <Button
-                    android:id="@+id/buttonShowVotes"
+                    android:id="@+id/buttonShowPopular"
                     android:layout_width="55dp"
                     android:layout_height="30dp"
-                    android:layout_marginRight="5dp"
-                    android:backgroundTint="@color/white"
-                    android:background="@drawable/button_corners"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/button_corners"
+                    android:backgroundTint="@color/white"
                     android:text="All"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
-                    android:textSize="14dp"
                     android:textFontWeight="500"
+                    android:textSize="14dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
             </LinearLayout>
 
 
-
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvMoviesVotes"
+                android:id="@+id/rvMoviesPopular"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="20dp"
                 android:scrollbars="horizontal"></androidx.recyclerview.widget.RecyclerView>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="Most voted"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
+                <Button
+                    android:id="@+id/buttonShowMostVoted"
+                    android:layout_width="55dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/button_corners"
+                    android:backgroundTint="@color/white"
+                    android:text="All"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textFontWeight="500"
+                    android:textSize="14dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
 
-            <TextView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMoviesMostVoted"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="woo Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="amazin Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Home Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
-                android:text="not Fragment"
-                android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
+                android:scrollbars="horizontal"></androidx.recyclerview.widget.RecyclerView>
 
 
         </LinearLayout>

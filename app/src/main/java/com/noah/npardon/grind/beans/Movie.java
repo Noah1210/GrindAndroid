@@ -100,4 +100,12 @@ public class Movie {
     public int getVote_count() {
         return vote_count;
     }
+
+    public void setVote_average(float vote_average) {
+        this.vote_average = vote_average;
+    }
+
+    public void setVote_count(int vote_count) {
+        this.vote_count = vote_count;
+    }
 }

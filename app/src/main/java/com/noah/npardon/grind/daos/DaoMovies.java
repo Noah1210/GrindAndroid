@@ -19,18 +19,25 @@ import java.util.List;
 
 public class DaoMovies {
     private static DaoMovies instance = null;
+    private final List<Movie> trendings;
     private final List<Movie> movies;
     private final List<Genre> genres;
 
     private DaoMovies() {
-        movies = new ArrayList<>();
+        trendings = new ArrayList<>();
         genres = new ArrayList<>();
+        movies = new ArrayList<>();
 
+    }
+
+    public List<Movie> getTrendings() {
+        return trendings;
     }
 
     public List<Movie> getMovies() {
         return movies;
     }
+
     public List<Genre> getGenres() {
         return genres;
     }
@@ -60,7 +67,7 @@ public class DaoMovies {
     }
 
     private void getTrendingMoviesFinished(String s, DelegateAsyncTask delegate) throws JSONException {
-        movies.clear();
+        trendings.clear();
         try {
             JSONObject jsonObject = new JSONObject(s);
             if (jsonObject.has("results")) {
@@ -69,7 +76,7 @@ public class DaoMovies {
                     JSONObject jsResult = resultsArray.getJSONObject(i);
                     ObjectMapper objectMapper = new ObjectMapper();
                     Movie movie = objectMapper.readValue(jsResult.toString(), Movie.class);
-                    movies.add(movie);
+                    trendings.add(movie);
                 }
             } else if (jsonObject.has("status_message")) {
                 String statusMessage = jsonObject.getString("status_message");
@@ -116,7 +123,51 @@ public class DaoMovies {
                 }
             } else if (jsonObject.has("status_message")) {
                 String statusMessage = jsonObject.getString("status_message");
-                Log.d("TrendingMoviesError", "getTrendingMoviesFinished: "+statusMessage);
+                Log.d("MovieGenresError", "getMovieGenresFinished: "+statusMessage);
+            } else {
+                System.out.println("Unknown JSON structure.");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        delegate.whenWSIsTerminated(s);
+    }
+
+    public void getAllMovies(DelegateAsyncTask delegate) {
+        String url = "3/discover/movie?include_adult=false&include_video=true&language=en-US&page=1";
+        Log.d("TAG", "getMovies: " + url);
+        WSConnexionHTTPS wsConnexionHTTPS = new WSConnexionHTTPS() {
+            @Override
+            protected void onPostExecute(String s) {
+                try {
+                    getMoviesFinished(s, delegate);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        wsConnexionHTTPS.execute(url, "TMDB");
+    }
+
+    private void getMoviesFinished(String s, DelegateAsyncTask delegate) throws JSONException {
+        movies.clear();
+        try {
+            JSONObject jsonObject = new JSONObject(s);
+            if (jsonObject.has("results")) {
+                JSONArray resultsArray = jsonObject.getJSONArray("results");
+                for(int i = 0 ; i < resultsArray.length() ; i++){
+                    JSONObject jsResult = resultsArray.getJSONObject(i);
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    Movie movie = objectMapper.readValue(jsResult.toString(), Movie.class);
+                    movies.add(movie);
+                }
+            } else if (jsonObject.has("status_message")) {
+                String statusMessage = jsonObject.getString("status_message");
+                Log.d("MoviesError", "getMoviesFinished: "+statusMessage);
             } else {
                 System.out.println("Unknown JSON structure.");
             }

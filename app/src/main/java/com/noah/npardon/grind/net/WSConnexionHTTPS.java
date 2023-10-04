@@ -22,7 +22,7 @@ import okhttp3.Response;
 
 
 public class WSConnexionHTTPS extends AsyncTask<String,Integer,String> {
-    private final String base_url = "http://10.10.145.191:80/grindAndroid/index.php?";
+    private final String base_url = "http://172.20.63.43:80/grindAndroid/index.php?";
     private final String tmdb = "https://api.themoviedb.org/";
     private final String tmbdToken = Constants.TMDB_API_KEY;
     public static final MediaType JSON = MediaType.get("text/plain; charset=utf-8");
