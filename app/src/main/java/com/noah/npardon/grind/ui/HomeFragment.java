@@ -17,53 +17,147 @@ import android.widget.TextView;
 import com.noah.npardon.grind.R;
 import com.noah.npardon.grind.beans.Genre;
 import com.noah.npardon.grind.beans.Movie;
-import com.noah.npardon.grind.beans.MoviesAdapter;
-import com.noah.npardon.grind.daos.DaoMovies;
+import com.noah.npardon.grind.beans.Show;
+import com.noah.npardon.grind.beans.VideoAdapter;
+import com.noah.npardon.grind.beans.VideoContent;
+import com.noah.npardon.grind.daos.DaoVideoContent;
 import com.noah.npardon.grind.daos.DelegateAsyncTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.Collections;
 import java.util.List;
 
 
 public class HomeFragment extends Fragment {
-    private MoviesAdapter trendingAdapter;
-    private MoviesAdapter mostPopularAdapter;
-    private MoviesAdapter mostVotedAdapter;
-    private TextView mainMovieGenre, mainMovieTitle;
-    private ImageView mainMovieImg;
-    private List<Movie> trendingsL;
-    private List<Movie> moviesVotedL;
-    private List<Movie> moviesPopularL;
+    private VideoAdapter trendingAdapter, mostPopularAdapter, mostVotedAdapter;
+    private TextView mainTrendingGenre, mainTrendingTitle;
+    private ImageView mainTrendingImg;
+    private RecyclerView recyclerViewMostPopular, recyclerViewTrending, recyclerViewMostVoted;
+    private List<VideoContent> trendingsL, votedL, popularL;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
-        trendingsL = DaoMovies.getInstance().getTrendings();
-        moviesPopularL = DaoMovies.getInstance().getMovies();
-        moviesVotedL = DaoMovies.getInstance().getMovies();
+        mainTrendingTitle = ((TextView) v.findViewById(R.id.txMainTrending));
+        mainTrendingGenre = ((TextView) v.findViewById(R.id.txMainTrendingGenre));
+        mainTrendingImg = ((ImageView) v.findViewById(R.id.imgMainTrendingPoster));
 
-        mainMovieTitle = ((TextView) v.findViewById(R.id.txMainMovie));
-        mainMovieGenre = ((TextView) v.findViewById(R.id.txMainMovieGenre));
-        mainMovieImg = ((ImageView) v.findViewById(R.id.imgMainMovie));
-        if (DaoMovies.getInstance().getGenres().isEmpty()) {
-            DaoMovies.getInstance().getMovieGenres(new DelegateAsyncTask() {
+        recyclerViewMostPopular = ((RecyclerView) v.findViewById(R.id.rvPopular));
+        recyclerViewTrending = ((RecyclerView) v.findViewById(R.id.rvTrending));
+        recyclerViewMostVoted = ((RecyclerView) v.findViewById(R.id.rvMostVoted));
+
+        setListViews();
+        setAdapters();
+        setLayoutManagers();
+        getAllGenres();
+        getAllListViewsData();
+
+        return v;
+    }
+
+    private void getAllListViewsData(){
+        DaoVideoContent.getInstance().getTrending(new DelegateAsyncTask() {
+            @Override
+            public void whenWSIsTerminated(Object result) {
+                loadVideoContent();
+            }
+        });
+        DaoVideoContent.getInstance().getBothPopular(new DelegateAsyncTask() {
+            @Override
+            public void whenWSIsTerminated(Object result) {
+                sortListView("popular");
+                loadMostPopular();
+            }
+        });
+
+        DaoVideoContent.getInstance().getBothMostVoted(new DelegateAsyncTask() {
+            @Override
+            public void whenWSIsTerminated(Object result) {
+                sortListView("mostVoted");
+                loadMostVoted();
+            }
+        });
+    }
+
+    private void sortPopular(){
+        boolean swapped;
+        VideoContent temp;
+        for (int i = 0; i < popularL.size() - 1; i++) {
+            swapped = false;
+            for (int j = 0; j < popularL.size() - i - 1; j++) {
+                if (popularL.get(j).getPopularity() < popularL.get(j + 1).getPopularity()) {
+                    temp = popularL.get(j);
+                    popularL.set(j, (popularL.get(j + 1)));
+                    popularL.set(j + 1, temp);
+                    swapped = true;
+                }
+            }
+            if (swapped == false)
+                break;
+        }
+    }
+    private void sortMostVoted(){
+        boolean swapped;
+        VideoContent temp;
+        for (int i = 0; i < votedL.size() - 1; i++) {
+            swapped = false;
+            for (int j = 0; j < votedL.size() - i - 1; j++) {
+                if (votedL.get(j).getVote_count() < votedL.get(j + 1).getVote_count()) {
+                    temp = votedL.get(j);
+                    votedL.set(j, (votedL.get(j + 1)));
+                    votedL.set(j + 1, temp);
+                    swapped = true;
+                }
+            }
+            if (swapped == false)
+                break;
+        }
+    }
+
+    private void sortListView(String type){
+        if(type.equals("popular")) {
+            sortPopular();
+        }else{
+            sortMostVoted();
+        }
+    }
+
+
+
+    private void getAllGenres(){
+        if (DaoVideoContent.getInstance().getMovieGenres().isEmpty()) {
+            DaoVideoContent.getInstance().getMovieGenres(new DelegateAsyncTask() {
                 @Override
                 public void whenWSIsTerminated(Object result) {
 
                 }
             });
         }
+        if (DaoVideoContent.getInstance().getShowGenres().isEmpty()) {
+            DaoVideoContent.getInstance().getShowGenres(new DelegateAsyncTask() {
+                @Override
+                public void whenWSIsTerminated(Object result) {
 
-        RecyclerView recyclerViewMostPopular = ((RecyclerView) v.findViewById(R.id.rvMoviesPopular));
-        RecyclerView recyclerViewTrending = ((RecyclerView) v.findViewById(R.id.rvMoviesTrending));
-        RecyclerView recyclerViewMostVoted = ((RecyclerView) v.findViewById(R.id.rvMoviesMostVoted));
+                }
+            });
+        }
+    }
 
-        trendingAdapter = new MoviesAdapter(trendingsL);
-        mostPopularAdapter = new MoviesAdapter(moviesPopularL);
-        mostVotedAdapter = new MoviesAdapter(moviesVotedL);
+    private void setListViews(){
+        trendingsL = DaoVideoContent.getInstance().getTrendings();
+        popularL = DaoVideoContent.getInstance().getPopular();
+        votedL = DaoVideoContent.getInstance().getMostVoted();
+    }
 
+    private void setAdapters(){
+        trendingAdapter = new VideoAdapter(trendingsL);
+        mostPopularAdapter = new VideoAdapter(popularL);
+        mostVotedAdapter = new VideoAdapter(votedL);
+    }
+
+    private void setLayoutManagers(){
         LinearLayoutManager mLayoutManagerTrending = new LinearLayoutManager(getActivity().getApplicationContext());
         mLayoutManagerTrending.setOrientation(LinearLayoutManager.HORIZONTAL);
 
@@ -73,6 +167,10 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager mLayoutManagerMostVoted = new LinearLayoutManager(getActivity().getApplicationContext());
         mLayoutManagerMostVoted.setOrientation(LinearLayoutManager.HORIZONTAL);
 
+        setRecyclerViews(mLayoutManagerTrending, mLayoutManagerMostPopular, mLayoutManagerMostVoted);
+    }
+
+    private void setRecyclerViews(LinearLayoutManager mLayoutManagerTrending, LinearLayoutManager mLayoutManagerMostPopular, LinearLayoutManager mLayoutManagerMostVoted){
         recyclerViewTrending.setLayoutManager(mLayoutManagerTrending);
         recyclerViewTrending.setItemAnimator(new DefaultItemAnimator());
         recyclerViewTrending.setAdapter(trendingAdapter);
@@ -84,85 +182,58 @@ public class HomeFragment extends Fragment {
         recyclerViewMostVoted.setLayoutManager(mLayoutManagerMostVoted);
         recyclerViewMostVoted.setItemAnimator(new DefaultItemAnimator());
         recyclerViewMostVoted.setAdapter(mostVotedAdapter);
-
-
-        DaoMovies.getInstance().getTrendingMovies(new DelegateAsyncTask() {
-            @Override
-            public void whenWSIsTerminated(Object result) {
-                loadTrending();
-            }
-        });
-        DaoMovies.getInstance().getAllMovies(new DelegateAsyncTask() {
-            @Override
-            public void whenWSIsTerminated(Object result) {
-                loadMostPopular();
-            }
-        });
-
-        return v;
     }
 
-    private void loadTrending() {
-        Movie movie1 = trendingsL.get(0);
-        trendingsL.remove(0);
-        mainMovieTitle.setText(movie1.getTitle());
-        String genres = "";
-        List<Genre> genresList = DaoMovies.getInstance().getGenres();
-        for (int i = 0; i < genresList.size(); i++) {
-            for (Genre g : movie1.getGenre_ids()) {
-                if (g.getId() == genresList.get(i).getId()) {
-                    genres += genresList.get(i).getName() + " - ";
-                }
-            }
+    private void loadVideoContent() {
+        if (trendingsL.get(0) instanceof Movie) {
+            loadTrendingMovie((Movie) trendingsL.get(0));
+        } else if (trendingsL.get(0) instanceof Show) {
+            loadTrendingShow((Show) trendingsL.get(0));
         }
-        mainMovieGenre.setText(genres.substring(0, genres.length() - 2));
-        Picasso.get().load("https://image.tmdb.org/t/p/w500" + movie1.getPoster_path()).into(mainMovieImg);
         trendingAdapter.notifyDataSetChanged();
     }
 
+
+    private String getGenresString(List<Genre> genreIds, List<Genre> genresList){
+        StringBuilder genres = new StringBuilder();
+        for (Genre genre : genresList) {
+            for (Genre g : genreIds) {
+                if (g.getId() == genre.getId()) {
+                    genres.append(genre.getName()).append(" - ");
+                }
+            }
+        }
+        return genres.substring(0, genres.length() - 2);
+    }
+
+
+    private void loadTrendingMovie(Movie m){
+        trendingsL.remove(0);
+        mainTrendingTitle.setText(m.getTitle());
+        List<Genre> genresList = DaoVideoContent.getInstance().getMovieGenres();
+        String genres = getGenresString(m.getGenre_ids(), genresList);
+        mainTrendingGenre.setText(genres);
+        Picasso.get().load("https://image.tmdb.org/t/p/w500" + m.getPoster_path()).into(mainTrendingImg);
+    }
+
+    private void loadTrendingShow(Show s){
+        trendingsL.remove(0);
+        mainTrendingTitle.setText(s.getName());
+        List<Genre> genresList = DaoVideoContent.getInstance().getShowGenres();
+        String genres = getGenresString(s.getGenre_ids(), genresList);
+        mainTrendingGenre.setText(genres);
+        Picasso.get().load("https://image.tmdb.org/t/p/w500" + s.getPoster_path()).into(mainTrendingImg);
+    }
+
+
     private void loadMostPopular() {
-        sortMostPopular();
         mostPopularAdapter.notifyDataSetChanged();
     }
 
-    private void sortMostPopular(){
-        int temp;
-        boolean swapped;
-        for (int i = 0; i < moviesPopularL.size() - 1; i++) {
-            swapped = false;
-            for (int j = 0; j < moviesPopularL.size() - i - 1; j++) {
-                if (moviesPopularL.get(j).getVote_count() < moviesPopularL.get(j + 1).getVote_count()) {
-                    temp = moviesPopularL.get(j).getVote_count();
-                    moviesPopularL.get(j).setVote_count(moviesPopularL.get(j + 1).getVote_count());
-                    moviesPopularL.get(j + 1).setVote_count(temp);
-                    swapped = true;
-                }
-            }
-            if (swapped == false)
-                break;
-        }
-    }
+
 
     private void loadMostVoted() {
-        sortMostVoted();
-        mostPopularAdapter.notifyDataSetChanged();
+        mostVotedAdapter.notifyDataSetChanged();
     }
 
-    private void sortMostVoted(){
-        int temp;
-        boolean swapped;
-        for (int i = 0; i < moviesVotedL.size() - 1; i++) {
-            swapped = false;
-            for (int j = 0; j < moviesPopularL.size() - i - 1; j++) {
-                if (moviesPopularL.get(j).getVote_count() < moviesPopularL.get(j + 1).getVote_count()) {
-                    temp = moviesPopularL.get(j).getVote_count();
-                    moviesPopularL.get(j).setVote_count(moviesPopularL.get(j + 1).getVote_count());
-                    moviesPopularL.get(j + 1).setVote_count(temp);
-                    swapped = true;
-                }
-            }
-            if (swapped == false)
-                break;
-        }
-    }
 }

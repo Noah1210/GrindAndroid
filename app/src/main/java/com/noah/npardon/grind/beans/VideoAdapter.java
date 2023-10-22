@@ -1,10 +1,8 @@
 package com.noah.npardon.grind.beans;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,8 +14,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
-    private List<Movie> movies;
+public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> {
+    private List<VideoContent> trendings ;
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;
@@ -31,8 +29,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         }
     }
 
-    public MoviesAdapter(List<Movie> movies) {
-        this.movies = movies;
+    public VideoAdapter(List<VideoContent> trendings) {
+        this.trendings = trendings;
     }
 
     @NonNull
@@ -45,15 +43,20 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Movie movie = movies.get(position);
-        holder.title.setText(movie.getTitle());
-        Picasso.get().load("https://image.tmdb.org/t/p/w500" + movie.getPoster_path()).into(holder.image);
-
+        if(trendings.get(position) instanceof Movie) {
+            Movie movie = (Movie) trendings.get(position);
+            holder.title.setText(movie.getTitle());
+            Picasso.get().load("https://image.tmdb.org/t/p/w500" + movie.getPoster_path()).into(holder.image);
+        }else{
+            Show show = (Show) trendings.get(position);
+            holder.title.setText(show.getName());
+            Picasso.get().load("https://image.tmdb.org/t/p/w500" + show.getPoster_path()).into(holder.image);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return movies.size();
+        return trendings.size();
     }
 }
 

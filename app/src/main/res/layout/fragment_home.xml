@@ -41,12 +41,11 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:id="@+id/imgMainMovie"
+                            android:id="@+id/imgMainTrendingPoster"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/trending_gradient_shape"
-                            android:scaleType="fitXY"
-                            tools:srcCompat="@drawable/dummy_grind" />
+                            android:scaleType="fitXY" />
 
                         <View
                             android:layout_width="371dp"
@@ -60,9 +59,11 @@
                     </FrameLayout>
 
                     <TextView
-                        android:id="@+id/txMainMovie"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/txMainTrending"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
                         android:layout_marginBottom="128dp"
                         android:ellipsize="end"
                         android:maxLines="2"
@@ -73,9 +74,11 @@
                         app:layout_constraintStart_toStartOf="parent" />
 
                     <TextView
-                        android:id="@+id/txMainMovieGenre"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/txMainTrendingGenre"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
                         android:layout_marginBottom="100dp"
                         android:textColor="@color/white"
                         android:textSize="12sp"
@@ -84,7 +87,7 @@
                         app:layout_constraintStart_toStartOf="parent" />
 
                     <Button
-                        android:id="@+id/buttonMainMovieDetails"
+                        android:id="@+id/buttonMainTrendingDetails"
                         android:layout_width="146dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
@@ -100,7 +103,7 @@
                         app:layout_constraintStart_toStartOf="parent" />
 
                     <Button
-                        android:id="@+id/buttonMainMovieAddList"
+                        android:id="@+id/buttonMainTrendingAddList"
                         android:layout_width="146dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
@@ -156,7 +159,7 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvMoviesTrending"
+                android:id="@+id/rvTrending"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="20dp"
@@ -165,7 +168,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -173,7 +176,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:text="Most voted"
+                    android:text="Most Popular"
                     android:textColor="@color/white"
                     android:textSize="22sp" />
 
@@ -196,7 +199,7 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvMoviesPopular"
+                android:id="@+id/rvPopular"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="20dp"
@@ -205,7 +208,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -236,7 +239,7 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvMoviesMostVoted"
+                android:id="@+id/rvMostVoted"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="20dp"
