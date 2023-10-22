@@ -217,7 +217,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadTrendingShow(Show s){
-        //test
+        //testNumberTwo
         trendingsL.remove(0);
         mainTrendingTitle.setText(s.getName());
         List<Genre> genresList = DaoVideoContent.getInstance().getShowGenres();
